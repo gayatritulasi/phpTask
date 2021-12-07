@@ -6,6 +6,7 @@ include ('phpmailer/Exception.php');
 
 
 // The message
+try{
 $message = 'Iam '.$_GET['firstname']. ' '.$_GET['lastname'].'from ' .$_GET['country'].' would like to update you about! '.$_GET['subject'] ;
 $subject = 'Contact - Movies';
 $to = 'tulasi.gayathri@gmail.com';
@@ -26,6 +27,9 @@ $mail = new PHPMailer\PHPMailer\PHPMailer();
         echo 'Could not send mail';
     }
  
- 
+}
+catch(Exception $e) {
+  echo 'Message: ' .$e->getMessage();
+}
 
 ?>
