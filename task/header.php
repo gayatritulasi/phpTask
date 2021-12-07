@@ -142,7 +142,7 @@ input[type=submit]:hover {
           <a class="nav-link header-text" href="movies.php">Movies List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link header-text" href="about.php">About Us</a>
+          <a class="nav-link header-text" href="#">About Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link header-text" href="contact.php">Contact Us</a>
