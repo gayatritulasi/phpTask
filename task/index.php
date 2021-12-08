@@ -1,6 +1,6 @@
 <?php
 include('header.php');
-$url = "http://localhost:8081/task/population.php";
+$url = "https://phptask.herokuapp.com/population.php";
 $json = file_get_contents($url);
 $json = json_decode($json,true); //get json string as an array - hence second parameter to be true
  
