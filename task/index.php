@@ -1,15 +1,18 @@
 <?php
 include('header.php');
-$url = "https://phptask.herokuapp.com/population.php";
+$url = "http://localhost:8081/task/population.php";
 $json = file_get_contents($url);
 $json = json_decode($json,true); //get json string as an array - hence second parameter to be true
-//var_dump($json);
+ 
 
 ?>
 <div id="populate-data"> 
 <div class="table-head header-text"> Population </div>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-<div class="table-data">
+ <div class="search-elements">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  <button onclick="sortTable()" class="btn btn-lg btn-primary">Sort</button>
+</div>
+ <div class="table-data table-responsive-sm">
   <table id="myTable" class="table-hover">
   
    <thead>

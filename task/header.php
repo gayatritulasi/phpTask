@@ -25,83 +25,105 @@
         font-family: 'Lato', sans-serif;
       }
       .table-head{
-        margin-left:317px;
+        width:80%;
+        margin:auto;
         font-size:24px;
         font-weight:400;
         margin-top:20px;
         margin-bottom:20px;
       }
       #myTable {
-  border-collapse: collapse;
-  width: 50%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-   
-}
-.table-data{
-  width:80%;
-  margin:auto;
-}
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 12px;
-}
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+      }  
+      .table-data{
+        width:80%;
+        margin:auto;
+      }
+      #myTable th, #myTable td {
+        text-align: left;
+        padding: 12px;
+      }
+      #myTable tr {
+        border-bottom: 1px solid #ddd;
+      }
+      #myTable tr.header, #myTable tr:hover {
+        background-color: #f1f1f1;
+      }
+      #myInput {
+        background-image: url('images/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 65%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+      }
+      #populate-data{
+        height:75vh;
+        overflow:scroll;
+      }
+      .poster{
+        width:150px;
+        height:150px;
+      }
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
 
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
+      input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin:20px;
+      }
 
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
-#myInput {
-    background-image: url('images/searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    width: 40%;
-    font-size: 16px;
-    margin-left:137px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-  }
-  #populate-data{
-    height:75vh;
-    overflow:scroll;
-  }
-  .poster{
-    width:150px;
-    height:150px;
-  }
-  input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
+    input[type=submit]:hover {
+      background-color: #45a049;
+    
+    }
+    .center-text{
+      text-align:center;
+    }
+    .btn{
+      height:48px !important;
+    }
+    .search-elements{
+      width:80%;
+      margin:auto;
+    }
+    .movie_search{
+      width:20% !important;
+      
+      background-image: url('images/searchicon.png');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      font-size: 16px;
+    
+      padding: 12px 20px 12px 40px !important;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+    @media only screen and (max-width: 400px) {
+      .movie_search{
+        width:100% !important;
+      }
+    }	 
 
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin:20px;
-}
 
-input[type=submit]:hover {
-  background-color: #45a049;
- 
-}
-.center-text{
-  text-align:center;
-}
-  
   </style>
   <script>
    function myFunction() {
@@ -120,6 +142,61 @@ input[type=submit]:hover {
         tr[i].style.display = "none";
       }
     }       
+  }
+}
+function search_movie(ele,index) {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById(ele).value;
+  filter = input.toUpperCase();
+   
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+ 
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[index];
+  
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
   }
 }
   </script>
@@ -142,7 +219,7 @@ input[type=submit]:hover {
           <a class="nav-link header-text" href="movies.php">Movies List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link header-text" href="#">About Us</a>
+          <a class="nav-link header-text" href="about.php">About Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link header-text" href="contact.php">Contact Us</a>
